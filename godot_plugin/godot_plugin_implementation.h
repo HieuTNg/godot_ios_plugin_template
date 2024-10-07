@@ -9,7 +9,13 @@
 #ifndef godot_plugin_implementation_h
 #define godot_plugin_implementation_h
 
+#include "core/version.h"
+
+// #if VERSION_MAJOR == 4
+#include "core/object/class_db.h"
+#else
 #include "core/object.h"
+#endif
 
 class PluginExample : public Object {
     GDCLASS(PluginExample, Object);

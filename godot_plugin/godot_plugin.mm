@@ -11,7 +11,7 @@
 #import "godot_plugin.h"
 #import "godot_plugin_implementation.h"
 
-#import "core/engine.h"
+#import "core/config/engine.h"
 
 PluginExample *plugin;
 

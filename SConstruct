@@ -152,20 +152,18 @@ else:
     quit();
 
 # Adding header files
-env.Append(CPPPATH=[
-    '.', 
-    'godot', 
-    'godot/main', 
-    'godot/core', 
-    'godot/core/os', 
-    'godot/core/platform',
-    'godot/platform/iphone',
-    'godot/modules',
-    'godot/scene',
-    'godot/servers',
-    'godot/drivers',
-    'godot/thirdparty',
-])
+if env['version'] == '3.x':
+    env.Append(CPPPATH=[
+        '.', 
+        'godot', 
+        'godot/platform/iphone',
+    ])
+else:
+       env.Append(CPPPATH=[
+        '.', 
+        'godot', 
+        'godot/platform/ios',
+    ])
 
 # tweak this if you want to use different folders, or more folders, to store your source code in.
 sources = Glob('godot_plugin/*.cpp')
@@ -173,7 +171,7 @@ sources.append(Glob('godot_plugin/*.mm'))
 sources.append(Glob('godot_plugin/*.m'))
 
 # lib<plugin>.<arch>-<simulator|iphone>.<release|debug|release_debug>.a
-library_platform = env["arch"] + "-" + ("simulator" if env["simulator"] else "iphone")
+library_platform = env["arch"] + "-" + ("simulator" if env["simulator"] else "ios")
 library_name = env['target_name'] + "." + library_platform + "." + env["target"] + ".a"
 library = env.StaticLibrary(target=env['target_path'] + library_name, source=sources)
 
